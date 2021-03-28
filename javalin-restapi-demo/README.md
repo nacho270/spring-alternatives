@@ -10,9 +10,9 @@ These are the differences they claim to have at the moment: https://javalin.io/c
 
 ### How to run
 
-Execute in the IDE through `com.nacho.blog.springalernatives.javalin.Main`. 
+Execute in the IDE through `com.nacho.blog.springalternatives.javalin.Main`. 
 
-Or through the console: `java  -jar target/javalin-restapi-demo-0.0.1-SNAPSHOT.jar`
+Or through the console: `java -jar target/javalin-restapi-demo-0.0.1-SNAPSHOT.jar`
 
 The web will start server on port 8080.
 

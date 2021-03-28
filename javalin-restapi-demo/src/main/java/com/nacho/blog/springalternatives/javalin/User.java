@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.sparkweb;
+package com.nacho.blog.springalternatives.javalin;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

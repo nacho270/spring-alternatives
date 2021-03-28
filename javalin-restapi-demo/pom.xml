@@ -146,7 +146,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.nacho.blog.springalernatives.javalin.Main</mainClass>
+							<mainClass>com.nacho.blog.springalternatives.javalin.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

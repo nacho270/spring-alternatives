@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.sparkweb;
+package com.nacho.blog.springalternatives.sparkweb;
 
 import static kong.unirest.Unirest.get;
 import static kong.unirest.Unirest.post;
@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nacho.blog.springalternatives.javalin.Application;
+import com.nacho.blog.springalternatives.javalin.User;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
