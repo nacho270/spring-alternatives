@@ -1,6 +1,6 @@
-package com.nacho.blog.springalernatives.dagger.dao;
+package com.nacho.blog.springalternatives.dagger.dao;
 
-import com.nacho.blog.springalernatives.dagger.model.User;
+import com.nacho.blog.springalternatives.dagger.model.User;
 
 public interface UserKeyValueStore {
 

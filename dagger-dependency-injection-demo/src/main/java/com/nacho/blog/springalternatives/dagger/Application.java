@@ -1,10 +1,10 @@
-package com.nacho.blog.springalernatives.dagger;
+package com.nacho.blog.springalternatives.dagger;
 
 import javax.inject.Inject;
 
-import com.nacho.blog.springalernatives.dagger.model.User;
-import com.nacho.blog.springalernatives.dagger.service.complex.UserService;
-import com.nacho.blog.springalernatives.dagger.service.simple.Operation;
+import com.nacho.blog.springalternatives.dagger.model.User;
+import com.nacho.blog.springalternatives.dagger.service.complex.UserService;
+import com.nacho.blog.springalternatives.dagger.service.simple.Operation;
 
 public class Application {
 

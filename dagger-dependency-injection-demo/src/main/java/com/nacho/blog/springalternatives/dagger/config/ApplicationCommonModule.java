@@ -1,9 +1,9 @@
-package com.nacho.blog.springalernatives.dagger.config;
+package com.nacho.blog.springalternatives.dagger.config;
 
 import javax.inject.Singleton;
 
-import com.nacho.blog.springalernatives.dagger.dao.UserKeyValueStore;
-import com.nacho.blog.springalernatives.dagger.service.complex.UserService;
+import com.nacho.blog.springalternatives.dagger.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.service.complex.UserService;
 
 import dagger.Module;
 

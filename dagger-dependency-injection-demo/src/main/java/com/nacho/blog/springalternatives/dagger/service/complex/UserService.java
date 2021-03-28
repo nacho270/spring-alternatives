@@ -1,11 +1,11 @@
-package com.nacho.blog.springalernatives.dagger.service.complex;
+package com.nacho.blog.springalternatives.dagger.service.complex;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
-import com.nacho.blog.springalernatives.dagger.dao.UserKeyValueStore;
-import com.nacho.blog.springalernatives.dagger.model.User;
+import com.nacho.blog.springalternatives.dagger.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.model.User;
 
 import lombok.extern.slf4j.Slf4j;
 

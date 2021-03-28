@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.dagger.model;
+package com.nacho.blog.springalternatives.dagger.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

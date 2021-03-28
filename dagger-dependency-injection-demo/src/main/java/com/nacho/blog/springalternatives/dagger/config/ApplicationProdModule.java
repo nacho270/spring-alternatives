@@ -1,9 +1,9 @@
-package com.nacho.blog.springalernatives.dagger.config;
+package com.nacho.blog.springalternatives.dagger.config;
 
-import com.nacho.blog.springalernatives.dagger.dao.RedisUserKeyValueStore;
-import com.nacho.blog.springalernatives.dagger.dao.UserKeyValueStore;
-import com.nacho.blog.springalernatives.dagger.service.simple.Operation;
-import com.nacho.blog.springalernatives.dagger.service.simple.PowerTwoOperation;
+import com.nacho.blog.springalternatives.dagger.dao.RedisUserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.service.simple.Operation;
+import com.nacho.blog.springalternatives.dagger.service.simple.PowerTwoOperation;
 
 import dagger.Binds;
 import dagger.Module;

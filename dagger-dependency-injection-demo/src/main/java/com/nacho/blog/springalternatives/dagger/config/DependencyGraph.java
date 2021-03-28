@@ -1,6 +1,6 @@
-package com.nacho.blog.springalernatives.dagger.config;
+package com.nacho.blog.springalternatives.dagger.config;
 
-import com.nacho.blog.springalernatives.dagger.Application;
+import com.nacho.blog.springalternatives.dagger.Application;
 
 import dagger.Component;
 import lombok.extern.slf4j.Slf4j;

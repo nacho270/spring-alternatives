@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.dagger.service.simple;
+package com.nacho.blog.springalternatives.dagger.service.simple;
 
 public interface Operation {
 

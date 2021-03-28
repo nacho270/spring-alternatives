@@ -106,7 +106,18 @@
 						<configuration>
 							<sources>
 								<source>target/generated-sources/annotations/</source>
-								...
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-test-sources/test-annotations/</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -180,7 +191,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.nacho.blog.springalernatives.dagger.Main</mainClass>
+							<mainClass>com.nacho.blog.springalternatives.dagger.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

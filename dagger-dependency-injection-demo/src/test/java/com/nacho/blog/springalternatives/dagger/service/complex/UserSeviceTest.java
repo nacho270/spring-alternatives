@@ -1,18 +1,45 @@
-package com.nacho.blog.springalernatives.guice.service.complex;
+package com.nacho.blog.springalternatives.dagger.service.complex;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import javax.inject.Singleton;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.nacho.blog.springalernatives.dagger.model.User;
-import com.nacho.blog.springalernatives.dagger.service.complex.UserService;
+import com.nacho.blog.springalternatives.dagger.dao.StubbedUserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.model.User;
+
+import dagger.Binds;
+import dagger.Component;
+import dagger.Module;
 
 public class UserSeviceTest {
 
-//  @Inject
-  private UserService userSevice;
+  @Component(modules = TestModule.class)
+  public interface UserServiceTestComponent {
+    UserService userService();
+  }
+
+  @Module
+  public abstract class TestModule {
+
+    @Singleton
+    public abstract UserService userService(final UserKeyValueStore userKeyValueStore);
+
+    @Binds
+    public abstract UserKeyValueStore stubbedUserKeyValueStore(StubbedUserKeyValueStore userKeyValueStore);
+  }
+
+  private static UserService userSevice;
+
+  @BeforeAll
+  public static void setup() {
+    userSevice = DaggerUserSeviceTest_UserServiceTestComponent.builder().build().userService();
+  }
 
   @Test
   public void testCanCreateUser() {

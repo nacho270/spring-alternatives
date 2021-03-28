@@ -1,9 +1,9 @@
-package com.nacho.blog.springalernatives.dagger.config;
+package com.nacho.blog.springalternatives.dagger.config;
 
-import com.nacho.blog.springalernatives.dagger.dao.StubbedUserKeyValueStore;
-import com.nacho.blog.springalernatives.dagger.dao.UserKeyValueStore;
-import com.nacho.blog.springalernatives.dagger.service.simple.MultiplyByTwoOperation;
-import com.nacho.blog.springalernatives.dagger.service.simple.Operation;
+import com.nacho.blog.springalternatives.dagger.dao.StubbedUserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.dagger.service.simple.MultiplyByTwoOperation;
+import com.nacho.blog.springalternatives.dagger.service.simple.Operation;
 
 import dagger.Binds;
 import dagger.Module;

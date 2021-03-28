@@ -1,6 +1,6 @@
-package com.nacho.blog.springalernatives.dagger;
+package com.nacho.blog.springalternatives.dagger;
 
-import com.nacho.blog.springalernatives.dagger.config.DependencyGraph;
+import com.nacho.blog.springalternatives.dagger.config.DependencyGraph;
 
 import lombok.extern.slf4j.Slf4j;
 

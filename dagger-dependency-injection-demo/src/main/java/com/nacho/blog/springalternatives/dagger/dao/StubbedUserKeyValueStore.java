@@ -1,11 +1,11 @@
-package com.nacho.blog.springalernatives.dagger.dao;
+package com.nacho.blog.springalternatives.dagger.dao;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
-import com.nacho.blog.springalernatives.dagger.model.User;
+import com.nacho.blog.springalternatives.dagger.model.User;
 
 import lombok.extern.slf4j.Slf4j;
 
