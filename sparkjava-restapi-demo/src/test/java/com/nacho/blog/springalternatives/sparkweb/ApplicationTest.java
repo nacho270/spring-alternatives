@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.sparkweb;
+package com.nacho.blog.springalternatives.sparkweb;
 
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.with;

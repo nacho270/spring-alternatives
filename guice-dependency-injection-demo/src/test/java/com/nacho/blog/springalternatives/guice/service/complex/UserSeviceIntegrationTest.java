@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.guice.service.complex;
+package com.nacho.blog.springalternatives.guice.service.complex;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
