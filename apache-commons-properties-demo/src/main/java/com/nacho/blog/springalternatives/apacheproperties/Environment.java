@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.apacheproperties;
+package com.nacho.blog.springalternatives.apacheproperties;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ public class Environment {
   private Configuration config;
 
   public Environment() {
-    System.out.println("Using profiles: " + System.getenv("profile"));
-    final var profile = Optional.ofNullable(System.getenv("profile")).orElse("").split(",");
+    System.out.println("Using profiles: " + System.getProperty("profile"));
+    final var profile = Optional.ofNullable(System.getProperty("profile")).orElse("").split(",");
     config = loadProperties(profile);
   }
 

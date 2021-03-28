@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.apacheproperties;
+package com.nacho.blog.springalternatives.apacheproperties;
 
 public class Application {
 
