@@ -1,9 +1,9 @@
-package com.nacho.blog.springalernatives.guice.dao;
+package com.nacho.blog.springalternatives.guice.dao;
 
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.nacho.blog.springalernatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.model.User;
 
 import lombok.extern.slf4j.Slf4j;
 

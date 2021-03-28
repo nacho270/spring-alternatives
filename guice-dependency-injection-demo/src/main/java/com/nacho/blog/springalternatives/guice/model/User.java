@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.guice.model;
+package com.nacho.blog.springalternatives.guice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

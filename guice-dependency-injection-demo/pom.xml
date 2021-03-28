@@ -158,7 +158,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.nacho.blog.springalernatives.guice.Main</mainClass>
+							<mainClass>com.nacho.blog.springalternatives.guice.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

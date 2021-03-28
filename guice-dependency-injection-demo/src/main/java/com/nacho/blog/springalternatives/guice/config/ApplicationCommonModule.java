@@ -1,8 +1,8 @@
-package com.nacho.blog.springalernatives.guice.config;
+package com.nacho.blog.springalternatives.guice.config;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
-import com.nacho.blog.springalernatives.guice.service.complex.UserService;
+import com.nacho.blog.springalternatives.guice.service.complex.UserService;
 
 public class ApplicationCommonModule extends AbstractModule {
 

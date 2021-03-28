@@ -1,9 +1,9 @@
-package com.nacho.blog.springalernatives.guice;
+package com.nacho.blog.springalternatives.guice;
 
 import com.google.inject.Inject;
-import com.nacho.blog.springalernatives.guice.model.User;
-import com.nacho.blog.springalernatives.guice.service.complex.UserService;
-import com.nacho.blog.springalernatives.guice.service.simple.Operation;
+import com.nacho.blog.springalternatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.service.complex.UserService;
+import com.nacho.blog.springalternatives.guice.service.simple.Operation;
 
 public class Application {
 

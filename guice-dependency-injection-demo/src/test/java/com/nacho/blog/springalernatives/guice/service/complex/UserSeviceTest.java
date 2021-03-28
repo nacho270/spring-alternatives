@@ -9,9 +9,10 @@ import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.nacho.blog.springalernatives.guice.config.ApplicationCommonModule;
-import com.nacho.blog.springalernatives.guice.config.ApplicationDevModule;
-import com.nacho.blog.springalernatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.config.ApplicationCommonModule;
+import com.nacho.blog.springalternatives.guice.config.ApplicationDevModule;
+import com.nacho.blog.springalternatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.service.complex.UserService;
 
 import name.falgout.jeffrey.testing.junit.guice.GuiceExtension;
 import name.falgout.jeffrey.testing.junit.guice.IncludeModule;

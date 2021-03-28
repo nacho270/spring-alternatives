@@ -1,10 +1,10 @@
-package com.nacho.blog.springalernatives.guice.service.complex;
+package com.nacho.blog.springalternatives.guice.service.complex;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.inject.Inject;
-import com.nacho.blog.springalernatives.guice.dao.UserKeyValueStore;
-import com.nacho.blog.springalernatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.guice.model.User;
 
 import lombok.extern.slf4j.Slf4j;
 

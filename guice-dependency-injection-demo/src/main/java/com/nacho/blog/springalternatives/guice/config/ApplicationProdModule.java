@@ -1,13 +1,13 @@
-package com.nacho.blog.springalernatives.guice.config;
+package com.nacho.blog.springalternatives.guice.config;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
-import com.nacho.blog.springalernatives.guice.dao.RedisUserKeyValueStore;
-import com.nacho.blog.springalernatives.guice.dao.UserKeyValueStore;
-import com.nacho.blog.springalernatives.guice.service.simple.Operation;
-import com.nacho.blog.springalernatives.guice.service.simple.PowerTwoOperation;
+import com.nacho.blog.springalternatives.guice.dao.RedisUserKeyValueStore;
+import com.nacho.blog.springalternatives.guice.dao.UserKeyValueStore;
+import com.nacho.blog.springalternatives.guice.service.simple.Operation;
+import com.nacho.blog.springalternatives.guice.service.simple.PowerTwoOperation;
 
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;

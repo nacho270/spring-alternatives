@@ -1,6 +1,6 @@
-package com.nacho.blog.springalernatives.guice;
+package com.nacho.blog.springalternatives.guice;
 
-import com.nacho.blog.springalernatives.guice.config.DependencyGraph;
+import com.nacho.blog.springalternatives.guice.config.DependencyGraph;
 
 import lombok.extern.slf4j.Slf4j;
 

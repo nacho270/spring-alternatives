@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.guice.config;
+package com.nacho.blog.springalternatives.guice.config;
 
 import java.util.ArrayList;
 import java.util.List;

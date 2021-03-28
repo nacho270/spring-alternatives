@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.guice.service.simple;
+package com.nacho.blog.springalternatives.guice.service.simple;
 
 public class MultiplyByTwoOperation implements Operation {
 

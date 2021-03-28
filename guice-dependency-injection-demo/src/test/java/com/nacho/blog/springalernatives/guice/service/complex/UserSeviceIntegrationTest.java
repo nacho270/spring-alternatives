@@ -13,9 +13,10 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import com.nacho.blog.springalernatives.guice.config.ApplicationCommonModule;
-import com.nacho.blog.springalernatives.guice.config.ApplicationProdModule;
-import com.nacho.blog.springalernatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.config.ApplicationCommonModule;
+import com.nacho.blog.springalternatives.guice.config.ApplicationProdModule;
+import com.nacho.blog.springalternatives.guice.model.User;
+import com.nacho.blog.springalternatives.guice.service.complex.UserService;
 
 import name.falgout.jeffrey.testing.junit.guice.GuiceExtension;
 import name.falgout.jeffrey.testing.junit.guice.IncludeModule;
