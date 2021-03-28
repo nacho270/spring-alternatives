@@ -65,7 +65,7 @@ public class Application {
     if (response.isSuccessful()) {
       return response.body();
     }
-    throw new RuntimeException("Error getting creating post");
+    throw new RuntimeException("Error creating post");
   }
 
   public List<Post> getAllPostsForUserSync(final Integer userId) throws IOException {

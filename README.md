@@ -8,7 +8,7 @@ In here you will find alternatives to the most common spring features.
 - [Restful apps with SparkWeb](https://github.com/nacho270/spring-alternatives/tree/master/rest-apis/sparkjava-restapi-demo)
 - [Restful apps with Javalin](https://github.com/nacho270/spring-alternatives/tree/master/rest-apis/javalin-restapi-demo)
 - [Rest client with Retrofit](https://github.com/nacho270/spring-alternatives/tree/master/rest-templates/retrofit-demo)
-- [Rest client with OkHttp]
+- [Rest client with OkHttp](https://github.com/nacho270/spring-alternatives/tree/master/rest-templates/okhttp-demo)
 - [Database with JOOQ]
 
 - And finally, [putting it all together]

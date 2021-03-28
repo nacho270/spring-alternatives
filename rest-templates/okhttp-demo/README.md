@@ -1,35 +1,17 @@
-# Javalin demo
+# OkHttp demo
 
-A simple demo on how you would use [Javalin](https://javalin.io/) to create restful apis.
+A simple demo of [okhttp](https://square.github.io/okhttp/). For this, i call the different endpoints offered by [jsonplaceholder](https://jsonplaceholder.typicode.com/guide/).
 
-I haven't focused on this, but with library you can also serve static content and render templates with various engines such as velocity and mustache.
+This is a low level implementation of an http client where the developer must do everything manually, [Retrofit](https://square.github.io/retrofit/) is built on top of this.
 
-It's a fork of [Spark Java](https://sparkjava.com/) so, just like it, it's super light-weight and quick to setup, it just works out-of-the-box.
+It can perform sync/async querys and it's quite popular around andriod developers.
 
-These are the differences they claim to have at the moment: https://javalin.io/comparisons/sparkjava
+The only caveat is that I had to manually end the application given okhttp threads were simply parked, same thing that happens with retrofit [here](https://github.com/nacho270/spring-alternatives/tree/master/rest-templates/retrofit-demo).
+Though, as per this site https://square.github.io/okhttp/4.x/okhttp/okhttp3/-ok-http-client/#shutdown-isnt-necessary, it shouldn't be necessary to finish it manually.
 
-### How to run
+## How to run
 
-Execute in the IDE through `com.nacho.blog.springalternatives.javalin.Main`. 
+Execute in the IDE through `com.nacho.blog.springalternatives.okhttp.Main`. 
 
-Or through the console: `java -jar target/javalin-restapi-demo-0.0.1-SNAPSHOT.jar`
+Or through the console: `java -jar target/okhttp-demo-0.0.1-SNAPSHOT.jar`
 
-The web will start server on port 8080.
-
-Once it's running you can run the following `curl` commands:
-
-- Simple ping: `curl localhost:8080/ping`
-- Example of reading a parm from the path: `curl localhost:8080/hello/user`
-- Create a user: `curl -XPOST localhost:8080/user -d '{ "id": 1, "name":"the user" }'`
-- Get user by id: `curl localhost:8080/user/1`
-- Delete user by id: `curl -XDELETE localhost:8080/user/1`
-- Search by name: `curl 'localhost:8080/user/search?name=user'`
-
-### Error requests
-- Search non-existing id will return 404 - not found: `curl localhost:8080/user/1000`
-- Posting a malformed by will return 400 - bad request: `curl -XPOST localhost:8080/user -d 'hello'`
-- Deleting with name instead of if will return 500 - Server error: `curl -XDELETE localhost:8080/user/hello` -> 500 - Server error
-
-### Tests
-
-For the sake of variete i have used [Unirest](http://kong.github.io/unirest-java/) for the tests. I simply start the app and rely on rest assured to issue the requests and make some assertions.
