@@ -4,7 +4,7 @@ In here you will find alternatives to the most common spring features.
 
 - [Configuration properties](https://github.com/nacho270/spring-alternatives/tree/master/apache-commons-properties-demo)
 - [Dependency injection with Google Guice](https://github.com/nacho270/spring-alternatives/tree/master/guice-dependency-injection-demo)
-- [Dependency injection with Google Dagger]
+- [Dependency injection with Google Dagger](https://github.com/nacho270/spring-alternatives/tree/master/dagger-dependency-injection-demo)
 - [Restful apps with SparkWeb](https://github.com/nacho270/spring-alternatives/tree/master/sparkjava-restapi-demo)
 - [Restful apps with Javalin](https://github.com/nacho270/spring-alternatives/tree/master/javalin-restapi-demo)
 - [Rest client with Retrofit]

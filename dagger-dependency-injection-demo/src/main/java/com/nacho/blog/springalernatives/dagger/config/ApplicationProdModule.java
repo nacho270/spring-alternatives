@@ -1,0 +1,27 @@
+package com.nacho.blog.springalernatives.dagger.config;
+
+import com.nacho.blog.springalernatives.dagger.dao.RedisUserKeyValueStore;
+import com.nacho.blog.springalernatives.dagger.dao.UserKeyValueStore;
+import com.nacho.blog.springalernatives.dagger.service.simple.Operation;
+import com.nacho.blog.springalernatives.dagger.service.simple.PowerTwoOperation;
+
+import dagger.Binds;
+import dagger.Module;
+import dagger.Provides;
+import redis.clients.jedis.Jedis;
+
+@Module
+public abstract class ApplicationProdModule {
+
+  @Binds
+  public abstract Operation powerTwoOperation(PowerTwoOperation operation);
+
+  @Binds
+  public abstract UserKeyValueStore redisUserKeyValueStore(RedisUserKeyValueStore userKeyValueStore);
+
+  @Provides
+  public static Jedis jedis() {
+    // potentially configure here the host, port, etc
+    return new Jedis();
+  }
+}
