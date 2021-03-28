@@ -144,7 +144,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.nacho.blog.springalernatives.sparkweb.Main</mainClass>
+							<mainClass>com.nacho.blog.springalternatives.sparkweb.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

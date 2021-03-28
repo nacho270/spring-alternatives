@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.google.gson.Gson;
+import com.nacho.blog.springalternatives.sparkweb.Application;
+import com.nacho.blog.springalternatives.sparkweb.User;
 
 import io.restassured.response.Response;
 

@@ -8,9 +8,9 @@ I found this framework to be super light-weight and quick to setup, it just work
 
 ### How to run
 
-Execute in the IDE through `com.nacho.blog.springalernatives.sparkweb.Main`. 
+Execute in the IDE through `com.nacho.blog.springalternatives.sparkweb.Main`. 
 
-Or through the console: `java  -jar target/sparkjava-restapi-demo-0.0.1-SNAPSHOT.jar`
+Or through the console: `java -jar target/sparkjava-restapi-demo-0.0.1-SNAPSHOT.jar`
 
 The web will start server on port 8080.
 

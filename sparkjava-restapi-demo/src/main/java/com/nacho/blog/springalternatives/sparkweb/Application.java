@@ -1,4 +1,4 @@
-package com.nacho.blog.springalernatives.sparkweb;
+package com.nacho.blog.springalternatives.sparkweb;
 
 import static java.lang.System.currentTimeMillis;
 import static java.util.stream.Collectors.toList;
