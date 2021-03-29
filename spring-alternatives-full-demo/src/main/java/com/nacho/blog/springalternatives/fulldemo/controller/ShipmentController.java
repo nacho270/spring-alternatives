@@ -1,8 +1,14 @@
 package com.nacho.blog.springalternatives.fulldemo.controller;
 
+import javax.inject.Inject;
+
 public class ShipmentController {
 
-//    @Autowired
+  @Inject
+  public ShipmentController() {
+  }
+
+  //    @Autowired
 //    private ShipmentService shipmentService;
 //
 //    @GetMapping(path = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })

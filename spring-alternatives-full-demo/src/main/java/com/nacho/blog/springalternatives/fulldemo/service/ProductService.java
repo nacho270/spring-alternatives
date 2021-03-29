@@ -1,11 +1,14 @@
 package com.nacho.blog.springalternatives.fulldemo.service;
 
-import lombok.RequiredArgsConstructor;
+import javax.inject.Inject;
 
-@RequiredArgsConstructor
 public class ProductService {
 
-//  private ProductRepository productRespository;
+  @Inject
+  public ProductService() {
+  }
+
+  //  private ProductRepository productRespository;
 //
 //  public Product createProduct(final String name, final BigDecimal price) {
 //    return productRespository.createProduct(Product.builder() //

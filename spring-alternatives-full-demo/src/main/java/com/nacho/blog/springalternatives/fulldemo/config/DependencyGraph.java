@@ -1,6 +1,6 @@
 package com.nacho.blog.springalternatives.fulldemo.config;
 
-import com.nacho.blog.springalternatives.fulldemo.Application;
+import com.nacho.blog.springalternatives.fulldemo.UrlMappings;
 
 import dagger.Component;
 
@@ -8,10 +8,10 @@ public class DependencyGraph {
 
   @Component(modules = { ApplicationCommonModule.class })
   interface ProdComponent {
-    Application application();
+    UrlMappings application();
   }
 
-  public static Application buildApplication() {
+  public static UrlMappings buildApplication() {
     if (hasProfile("dev")) {
 //      return DaggerDependencyGraph_DevComponent.create().application();
     } else {

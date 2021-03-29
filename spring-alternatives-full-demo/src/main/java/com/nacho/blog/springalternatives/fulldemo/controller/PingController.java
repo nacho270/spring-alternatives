@@ -3,9 +3,15 @@ package com.nacho.blog.springalternatives.fulldemo.controller;
 import spark.Request;
 import spark.Response;
 
+import javax.inject.Inject;
+
 public class PingController {
 
-  public static String handle(final Request request, final Response response) {
+  @Inject
+  public PingController() {
+  }
+
+  public String handle(final Request request, final Response response) {
     return "pong";
   }
 }
