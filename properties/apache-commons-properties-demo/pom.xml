@@ -9,7 +9,6 @@
 	<properties>
 		<java.version>11</java.version>
 		<commons-configuration2.version>2.7</commons-configuration2.version>
-		<guice.extension.version>1.2.1</guice.extension.version>
 		<junit5.version>5.4.2</junit5.version>
 	</properties>
 
