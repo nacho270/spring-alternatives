@@ -23,7 +23,7 @@
 		<mysqlconnector.version>8.0.23</mysqlconnector.version>
 		<h2.version>1.4.200</h2.version>
 
-		<sparkweb.version>2.9.3</sparkweb.version>
+		<javalin.version>3.13.4</javalin.version>
 
 		<retrofit.version>2.9.0</retrofit.version>
 
@@ -110,9 +110,9 @@
 		<!-- REST API -->
 
 		<dependency>
-			<groupId>com.sparkjava</groupId>
-			<artifactId>spark-core</artifactId>
-			<version>${sparkweb.version}</version>
+			<groupId>io.javalin</groupId>
+			<artifactId>javalin</artifactId>
+			<version>${javalin.version}</version>
 		</dependency>
 
 		<!-- REST TEMPLATE -->
@@ -162,6 +162,50 @@
 		</dependency>
 	</dependencies>
 
+    <profiles>
+        <profile>
+            <id>codegen</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jooq</groupId>
+                        <artifactId>jooq-codegen-maven</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <jdbc>
+                                        <driver>com.mysql.cj.jdbc.Driver</driver>
+                                        <url>jdbc:mysql://localhost:3306/alternatives_demo</url>
+                                        <user>root</user>
+                                        <password>root</password>
+                                    </jdbc>
+                                    <generator>
+                                        <database>
+                                            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+                                            <includes>.*</includes>
+                                            <inputSchema>alternatives_demo</inputSchema>
+                                        </database>
+                                        <target>
+                                            <packageName>com.nacho.blog.springalternatives.fulldemo.gen</packageName>
+                                            <directory>target/generated-sources/jooq</directory>
+                                        </target>
+                                    </generator>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 	<build>
 <!-- 		<resources> -->
 <!-- 			<resource> -->
@@ -207,38 +251,6 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jooq</groupId>
-				<artifactId>jooq-codegen-maven</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<jdbc>
-								<driver>com.mysql.cj.jdbc.Driver</driver>
-								<url>jdbc:mysql://localhost:3306/alternatives_demo</url>
-								<user>root</user>
-								<password>root</password>
-							</jdbc>
-							<generator>
-								<database>
-									<name>org.jooq.meta.mysql.MySQLDatabase</name>
-									<includes>.*</includes>
-									<excludes></excludes>
-									<inputSchema>alternatives_demo</inputSchema>
-								</database>
-								<target>
-									<packageName>com.nacho.blog.springalternatives.fulldemo.gen</packageName>
-									<directory>target/generated-sources/jooq</directory>
-								</target>
-							</generator>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

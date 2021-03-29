@@ -7,6 +7,6 @@ import lombok.Value;
 @Value
 public class CreateProductRequest {
 
-    private String name;
-    private BigDecimal price;
+  String name;
+  BigDecimal price;
 }
