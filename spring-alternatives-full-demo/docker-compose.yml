@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+   mysql:
+      image: mysql:latest
+      ports:
+         - 3306:3306
+      environment:
+         MYSQL_ROOT_PASSWORD: root
+      command: --init-file /data/application/init.sql
+      volumes:
+         - ./init.sql:/data/application/init.sql
+
+   jooq:
+      image: nacho/jooq-with-codegen-demo:latest
+      environment:
+         spring.datasource.url: jdbc:mysql://mysql:3306/jooq
+      ports:
+         - 8080:8080
+      links:
+         - mysql
