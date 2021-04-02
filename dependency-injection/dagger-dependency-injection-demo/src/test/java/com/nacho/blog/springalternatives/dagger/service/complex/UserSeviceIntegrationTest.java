@@ -11,11 +11,12 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import com.nacho.blog.springalternatives.dagger.config.ApplicationCommonModule;
 import com.nacho.blog.springalternatives.dagger.config.ApplicationProdModule;
 import com.nacho.blog.springalternatives.dagger.model.User;
 
 import dagger.Component;
+
+import javax.inject.Singleton;
 
 @Testcontainers
 public class UserSeviceIntegrationTest {
@@ -24,7 +25,8 @@ public class UserSeviceIntegrationTest {
   public GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest")) //
       .withExposedPorts(6379);
 
-  @Component(modules = { ApplicationCommonModule.class, ApplicationProdModule.class })
+  @Singleton
+  @Component(modules = { ApplicationProdModule.class })
   public interface UserServiceTestComponent {
     UserService userService();
   }

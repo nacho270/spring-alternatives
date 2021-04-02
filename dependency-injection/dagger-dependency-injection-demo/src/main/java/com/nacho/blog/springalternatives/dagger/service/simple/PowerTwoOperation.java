@@ -1,7 +1,9 @@
 package com.nacho.blog.springalternatives.dagger.service.simple;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class PowerTwoOperation implements Operation {
 
   @Inject

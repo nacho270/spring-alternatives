@@ -21,7 +21,7 @@ public abstract class ApplicationProdModule {
 
   @Provides
   public static Jedis jedis() {
-    // potentially configure here the host, port, etc
+    // configure the host, port, etc
     return new Jedis();
   }
 }

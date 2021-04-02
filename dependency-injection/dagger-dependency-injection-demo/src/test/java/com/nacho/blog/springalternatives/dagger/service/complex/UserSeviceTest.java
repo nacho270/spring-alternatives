@@ -19,6 +19,7 @@ import dagger.Module;
 
 public class UserSeviceTest {
 
+  @Singleton
   @Component(modules = TestModule.class)
   public interface UserServiceTestComponent {
     UserService userService();

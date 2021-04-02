@@ -14,6 +14,8 @@ I found it's learning curve is very steep until you realize how it works with a 
 
 	- By being based on generated code you will to tweak your IDE to compile properly or perform a `mvn compile` every time you change your dependencies.
 	- There's also not too much documentation or examples.
+	
+One really useful tip for this is: **Use `@Module` to tell dagger the things it cannot figure out**, ie: datasource configuration, implementation of interfaces.
 
 Of course, the way I have done things is by no means the only one. You can play a bit more on how you would build the modules.
 

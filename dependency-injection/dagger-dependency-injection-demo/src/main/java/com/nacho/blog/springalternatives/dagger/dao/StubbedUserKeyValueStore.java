@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.nacho.blog.springalternatives.dagger.model.User;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Singleton
 public class StubbedUserKeyValueStore implements UserKeyValueStore {
 
   private static final Map<Integer, User> USER_CACHE = new HashMap<>();

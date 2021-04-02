@@ -5,15 +5,19 @@ import com.nacho.blog.springalternatives.dagger.Application;
 import dagger.Component;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.inject.Singleton;
+
 @Slf4j
 public class DependencyGraph {
 
-  @Component(modules = { ApplicationCommonModule.class, ApplicationDevModule.class })
+  @Singleton
+  @Component(modules = {  ApplicationDevModule.class })
   interface DevComponent {
     Application application();
   }
 
-  @Component(modules = { ApplicationCommonModule.class, ApplicationProdModule.class })
+  @Singleton
+  @Component(modules = { ApplicationProdModule.class })
   interface ProdComponent {
     Application application();
   }

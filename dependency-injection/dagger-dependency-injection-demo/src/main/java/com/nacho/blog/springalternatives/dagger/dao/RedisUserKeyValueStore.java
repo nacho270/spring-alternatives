@@ -1,6 +1,7 @@
 package com.nacho.blog.springalternatives.dagger.dao;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.google.gson.Gson;
 import com.nacho.blog.springalternatives.dagger.model.User;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 
 @Slf4j
+@Singleton
 public class RedisUserKeyValueStore implements UserKeyValueStore {
 
   private static final Gson GSON = new Gson();
