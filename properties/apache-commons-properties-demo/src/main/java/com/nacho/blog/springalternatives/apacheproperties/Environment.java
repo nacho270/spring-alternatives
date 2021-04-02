@@ -33,9 +33,9 @@ public class Environment {
 
     // Not very intuitive: First load the specific properties files and then add the default one
     Stream.of(profiles) //
-        .filter(p -> !isBlank(p)) //
-        .map(p -> "application-" + p) //
-        .forEach(configurationsToLoad::add);
+            .filter(p -> !isBlank(p)) //
+            .map(p -> "application-" + p) //
+            .forEach(configurationsToLoad::add);
     configurationsToLoad.add("application");
 
     for (final String config : configurationsToLoad) {
@@ -45,6 +45,14 @@ public class Environment {
         System.out.println(e.getMessage());
       }
     }
+
+    System.getenv().forEach((k, v) -> {
+      if (configuration.containsKey(k)) {
+        System.out.println("Overriding property " + k + " with value " + v);
+      }
+      configuration.setProperty(k, v);
+    });
+
     return configuration;
   }
 
