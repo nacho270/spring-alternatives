@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 public class DependencyGraph {
 
   @Singleton
-  @Component(modules = {PersistenceModule.class})
+  @Component(modules = {UserApiModule.class, PersistenceModule.class})
   interface ProdComponent {
     UrlMappings application();
   }

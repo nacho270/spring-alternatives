@@ -4,57 +4,66 @@ import com.nacho.blog.springalternatives.fulldemo.controller.dto.CreateShipmentR
 import com.nacho.blog.springalternatives.fulldemo.model.Item;
 import com.nacho.blog.springalternatives.fulldemo.model.Shipment;
 import com.nacho.blog.springalternatives.fulldemo.repository.ShipmentRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.jooq.Configuration;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
+@Slf4j
 @Singleton
 public class ShipmentService {
 
   private final ShipmentRepository shipmentRepository;
-
   private final ProductService productService;
+  private final UserService userService;
+  private final TransactionManager transactionManager;
 
   @Inject
-  public ShipmentService(ShipmentRepository shipmentRepository, ProductService productService) {
+  public ShipmentService(ShipmentRepository shipmentRepository, ProductService productService,
+                         UserService userService, TransactionManager transactionManager) {
     this.shipmentRepository = shipmentRepository;
     this.productService = productService;
+    this.userService = userService;
+    this.transactionManager = transactionManager;
   }
 
   public Shipment getById(final UUID id) {
     return shipmentRepository.getById(id);
   }
 
-  public Shipment createShipment(final List<CreateShipmentRequest.ItemRequest> requestItems) {
-    Shipment shipment = mapShipment(requestItems);
-
-    shipment = shipmentRepository.insertShipment(shipment);
-
-    shipmentRepository.insertShipmentItems(shipment);
-
-    return shipment;
+  public Shipment createShipment(final CreateShipmentRequest createShipmentRequest) {
+    return transactionManager.doInTransaction(configuration -> {
+      Shipment shipment = mapShipment(configuration, createShipmentRequest);
+      log.info("Saving shipment");
+      shipment = shipmentRepository.insertShipment(configuration, shipment);
+      log.info("Saving items");
+      shipmentRepository.insertShipmentItems(configuration, shipment);
+      return shipment;
+    });
   }
 
   public Integer getShipmentCount() {
     return shipmentRepository.getShipmentCount();
   }
 
-  public void clearShipments(){
+  public void clearShipments() {
     shipmentRepository.clearShipments();
   }
 
-  private Shipment mapShipment(final List<CreateShipmentRequest.ItemRequest> requestItems) {
-    var items = requestItems.stream() //
+  private Shipment mapShipment(Configuration configuration, final CreateShipmentRequest createShipmentRequest) {
+    var items = createShipmentRequest.getItems().stream() //
             .map(this::mapItem) //
-            .collect(Collectors.toList());
+            .collect(toList());
     return Shipment.builder()
-            .items(items)
-            .total(items.stream()//
-                    .map(it -> it.getProduct().getPrice().multiply(BigDecimal.valueOf(it.getQuantity().longValue()))) //
+            .items(items) //
+            .user(userService.getById(configuration, createShipmentRequest.getUserId()))
+            .total(items.stream() //
+                    .map(it -> it.getProduct().getPrice().multiply(BigDecimal.valueOf(Long.valueOf(it.getQuantity())))) //
                     .reduce(BigDecimal.ZERO, BigDecimal::add))
             .build();
   }

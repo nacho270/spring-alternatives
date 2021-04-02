@@ -23,7 +23,7 @@ public class ShipmentController {
   }
 
   public Shipment create(final CreateShipmentRequest createShipmentRequest) {
-    return shipmentService.createShipment(createShipmentRequest.getItems());
+    return shipmentService.createShipment(createShipmentRequest);
   }
 
   public Integer count() {
