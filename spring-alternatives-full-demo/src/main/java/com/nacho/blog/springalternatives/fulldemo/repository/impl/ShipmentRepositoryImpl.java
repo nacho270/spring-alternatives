@@ -3,18 +3,14 @@ package com.nacho.blog.springalternatives.fulldemo.repository.impl;
 import com.nacho.blog.springalternatives.fulldemo.model.Item;
 import com.nacho.blog.springalternatives.fulldemo.model.Shipment;
 import com.nacho.blog.springalternatives.fulldemo.repository.ShipmentRepository;
-import org.jooq.Configuration;
 import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.UUID;
 
 import static com.nacho.blog.springalternatives.fulldemo.gen.Tables.*;
-import static org.jooq.impl.DSL.jsonObject;
-import static org.jooq.impl.DSL.key;
-import static org.jooq.impl.DSL.jsonArrayAgg;
+import static org.jooq.impl.DSL.*;
 
 @Singleton
 public class ShipmentRepositoryImpl implements ShipmentRepository {
@@ -61,9 +57,9 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
   }
 
   @Override
-  public Shipment insertShipment(Configuration configuration, final Shipment shipment) {
+  public Shipment insertShipment(final Shipment shipment) {
     final UUID shipmentId = UUID.randomUUID();
-    DSL.using(configuration).insertInto(T_SHIPMENT, T_SHIPMENT.ID, T_SHIPMENT.TOTAL, T_SHIPMENT.F_USER_ID) //
+    dslContext.insertInto(T_SHIPMENT, T_SHIPMENT.ID, T_SHIPMENT.TOTAL, T_SHIPMENT.F_USER_ID) //
             .values(shipmentId.toString(), shipment.getTotal(), shipment.getUser().getId()) //
             .execute();
     shipment.setId(shipmentId);
@@ -71,13 +67,12 @@ public class ShipmentRepositoryImpl implements ShipmentRepository {
   }
 
   @Override
-  public void insertShipmentItems(Configuration configuration, final Shipment shipment) {
-    shipment.getItems().forEach(item -> insertItem(item, shipment, configuration));
+  public void insertShipmentItems(final Shipment shipment) {
+    shipment.getItems().forEach(item -> insertItem(item, shipment));
   }
 
-  private void insertItem(Item it, Shipment shipment, Configuration configuration) {
-    DSL.using(configuration)
-            .insertInto(T_ITEM, T_ITEM.ID, T_ITEM.QUANTITY, T_ITEM.F_PRODUCT_ID, T_ITEM.F_SHIPMENT_ID) //
+  private void insertItem(Item it, Shipment shipment) {
+    dslContext.insertInto(T_ITEM, T_ITEM.ID, T_ITEM.QUANTITY, T_ITEM.F_PRODUCT_ID, T_ITEM.F_SHIPMENT_ID) //
             .values(UUID.randomUUID().toString(), it.getQuantity(), it.getProduct().getId().toString(), shipment.getId().toString()) //
             .execute();
   }

@@ -9,9 +9,9 @@ public interface ShipmentRepository {
 
   Shipment getById(UUID id);
 
-  Shipment insertShipment(Configuration configuration, Shipment shipment);
+  Shipment insertShipment(Shipment shipment);
 
-  void insertShipmentItems(Configuration configuration, Shipment shipment);
+  void insertShipmentItems(Shipment shipment);
 
   Integer getShipmentCount();
 

@@ -2,13 +2,10 @@ package com.nacho.blog.springalternatives.fulldemo.repository.impl;
 
 import com.nacho.blog.springalternatives.fulldemo.model.User;
 import com.nacho.blog.springalternatives.fulldemo.repository.UserRepository;
-import org.jooq.Configuration;
 import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.util.Optional;
 
 import static com.nacho.blog.springalternatives.fulldemo.gen.Tables.T_USER;
@@ -33,8 +30,8 @@ public class UserRepositoryImpl implements UserRepository {
   }
 
   @Override
-  public User save(Configuration configuration, User user) {
-    DSL.using(configuration) //
+  public User save(User user) {
+    dslContext //
             .insertInto(T_USER, T_USER.ID, T_USER.EMAIL) //
             .values(user.getId(), user.getEmail()) //
             .execute();

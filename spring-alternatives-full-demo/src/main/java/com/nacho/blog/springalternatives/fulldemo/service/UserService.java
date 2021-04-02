@@ -22,7 +22,7 @@ public class UserService {
     this.userApi = userApi;
   }
 
-  public User getById(Configuration configuration, Integer userId) {
+  public User getById(Integer userId) {
     log.info("Searching user {} in the database", userId);
     return userRepository
             .getById(userId)
@@ -30,17 +30,17 @@ public class UserService {
               log.info("User found in the DB, no need to query the api");
               return user;
             })
-            .orElseGet(() -> getUserFromApi(configuration, userId));
+            .orElseGet(() -> getUserFromApi(userId));
   }
 
-  private User getUserFromApi(Configuration configuration, Integer userId) {
+  private User getUserFromApi(Integer userId) {
     log.info("User {} not found in the database, falling back to the api", userId);
     try {
       Response<User> userResponse = userApi.getById(userId).execute();
       if (userResponse.isSuccessful()) {
         User user = userResponse.body();
         log.info("Found user in the api, saving into the DB");
-        return userRepository.save(configuration, user);
+        return userRepository.save(user);
       }
       log.error("Error fetching user {}", userId);
       throw new RuntimeException();

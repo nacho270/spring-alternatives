@@ -15,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.jooq.impl.DataSourceConnectionProvider;
+import org.jooq.impl.DefaultConfiguration;
+import org.jooq.impl.ThreadLocalTransactionProvider;
 
 import javax.inject.Singleton;
 import javax.sql.DataSource;
@@ -47,6 +50,12 @@ public abstract class PersistenceModule {
   public static DSLContext dslContext(DataSource dataSource, Environment environment) {
     var sqlDialect = SQLDialect.valueOf(environment.getString("datasource.dialect"));
     log.info("Using SQL dialect: {}", sqlDialect);
-    return DSL.using(dataSource, sqlDialect);
+    var cp = new DataSourceConnectionProvider(dataSource);
+    return DSL.using(
+            new DefaultConfiguration()
+                    .set(cp)
+                    .set(sqlDialect)
+                    // Ideal use case for ThreadLocalTransactionProvider as no 3rd party libraries for tx is used here..
+                    .set(new ThreadLocalTransactionProvider(cp, true)));
   }
 }

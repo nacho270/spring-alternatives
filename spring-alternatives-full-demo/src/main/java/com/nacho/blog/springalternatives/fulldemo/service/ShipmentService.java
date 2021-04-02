@@ -38,11 +38,11 @@ public class ShipmentService {
 
   public Shipment createShipment(final CreateShipmentRequest createShipmentRequest) {
     return transactionManager.doInTransaction(configuration -> {
-      Shipment shipment = mapShipment(configuration, createShipmentRequest);
+      Shipment shipment = mapShipment(createShipmentRequest);
       log.info("Saving shipment");
-      shipment = shipmentRepository.insertShipment(configuration, shipment);
+      shipment = shipmentRepository.insertShipment(shipment);
       log.info("Saving items");
-      shipmentRepository.insertShipmentItems(configuration, shipment);
+      shipmentRepository.insertShipmentItems(shipment);
       return shipment;
     });
   }
@@ -55,15 +55,15 @@ public class ShipmentService {
     shipmentRepository.clearShipments();
   }
 
-  private Shipment mapShipment(Configuration configuration, final CreateShipmentRequest createShipmentRequest) {
+  private Shipment mapShipment(final CreateShipmentRequest createShipmentRequest) {
     var items = createShipmentRequest.getItems().stream() //
             .map(this::mapItem) //
             .collect(toList());
     return Shipment.builder()
             .items(items) //
-            .user(userService.getById(configuration, createShipmentRequest.getUserId()))
+            .user(userService.getById(createShipmentRequest.getUserId()))
             .total(items.stream() //
-                    .map(it -> it.getProduct().getPrice().multiply(BigDecimal.valueOf(Long.valueOf(it.getQuantity())))) //
+                    .map(it -> it.getProduct().getPrice().multiply(BigDecimal.valueOf(it.getQuantity().longValue()))) //
                     .reduce(BigDecimal.ZERO, BigDecimal::add))
             .build();
   }
