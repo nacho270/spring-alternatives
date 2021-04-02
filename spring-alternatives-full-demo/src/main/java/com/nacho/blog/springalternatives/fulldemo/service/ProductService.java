@@ -1,27 +1,36 @@
 package com.nacho.blog.springalternatives.fulldemo.service;
 
-import javax.inject.Inject;
+import com.nacho.blog.springalternatives.fulldemo.model.Product;
+import com.nacho.blog.springalternatives.fulldemo.repository.ProductRepository;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
+
+@Singleton
 public class ProductService {
 
+  private final ProductRepository productRepository;
+
   @Inject
-  public ProductService() {
+  public ProductService(ProductRepository productRepository) {
+    this.productRepository = productRepository;
   }
 
-  //  private ProductRepository productRespository;
-//
-//  public Product createProduct(final String name, final BigDecimal price) {
-//    return productRespository.createProduct(Product.builder() //
-//        .name(name) //
-//        .price(price) //
-//        .build());
-//  }
-//
-//  public List<Product> getProducts() {
-//    return productRespository.getProducts();
-//  }
-//
-//  public Product getById(final UUID id) {
-//    return productRespository.getById(id);
-//  }
+  public Product createProduct(final String name, final BigDecimal price) {
+    return productRepository.createProduct(Product.builder() //
+        .name(name) //
+        .price(price) //
+        .build());
+  }
+
+  public List<Product> getProducts() {
+    return productRepository.getProducts();
+  }
+
+  public Product getById(final UUID id) {
+    return productRepository.getById(id);
+  }
 }

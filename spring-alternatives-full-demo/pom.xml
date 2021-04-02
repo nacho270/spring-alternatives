@@ -20,6 +20,7 @@
 		<dagger.version>2.33</dagger.version>
 
 		<jooq.version>3.14.8</jooq.version>
+		<hikari.version>4.0.3</hikari.version>
 		<mysqlconnector.version>8.0.23</mysqlconnector.version>
 		<h2.version>1.4.200</h2.version>
 
@@ -102,9 +103,19 @@
 			<version>${jooq.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>${hikari.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysqlconnector.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
 		</dependency>
 
 		<!-- REST API -->
@@ -162,50 +173,6 @@
 		</dependency>
 	</dependencies>
 
-    <profiles>
-        <profile>
-            <id>codegen</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jooq</groupId>
-                        <artifactId>jooq-codegen-maven</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <jdbc>
-                                        <driver>com.mysql.cj.jdbc.Driver</driver>
-                                        <url>jdbc:mysql://localhost:3306/alternatives_demo</url>
-                                        <user>root</user>
-                                        <password>root</password>
-                                    </jdbc>
-                                    <generator>
-                                        <database>
-                                            <name>org.jooq.meta.mysql.MySQLDatabase</name>
-                                            <includes>.*</includes>
-                                            <inputSchema>alternatives_demo</inputSchema>
-                                        </database>
-                                        <target>
-                                            <packageName>com.nacho.blog.springalternatives.fulldemo.gen</packageName>
-                                            <directory>target/generated-sources/jooq</directory>
-                                        </target>
-                                    </generator>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
 	<build>
 <!-- 		<resources> -->
 <!-- 			<resource> -->
@@ -216,6 +183,7 @@
 <!-- 			</resource> -->
 <!-- 		</resources> -->
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -252,6 +220,39 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<jdbc>
+								<driver>com.mysql.cj.jdbc.Driver</driver>
+								<url>jdbc:mysql://localhost:3306/alternatives_demo</url>
+								<user>root</user>
+								<password>root</password>
+							</jdbc>
+							<generator>
+								<database>
+									<name>org.jooq.meta.mysql.MySQLDatabase</name>
+									<includes>.*</includes>
+									<inputSchema>alternatives_demo</inputSchema>
+								</database>
+								<target>
+									<packageName>com.nacho.blog.springalternatives.fulldemo.gen</packageName>
+									<directory>target/generated-sources/jooq</directory>
+								</target>
+							</generator>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -284,6 +285,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -302,6 +304,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -315,6 +318,13 @@
 					</archive>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+			</plugin>
+
 		</plugins>
 	</build>
 

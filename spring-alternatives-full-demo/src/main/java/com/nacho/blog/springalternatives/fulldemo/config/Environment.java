@@ -1,27 +1,26 @@
 package com.nacho.blog.springalternatives.fulldemo.config;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.configuration2.CombinedConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
+import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration2.tree.MergeCombiner;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import javax.inject.Inject;
-
-import org.apache.commons.configuration2.CombinedConfiguration;
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.builder.fluent.Configurations;
-import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.commons.configuration2.tree.MergeCombiner;
-
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
+@Singleton
 public class Environment {
 
-  private Configuration config;
+  private final Configuration config;
 
   @Inject
   public Environment() {
@@ -39,18 +38,16 @@ public class Environment {
   }
 
   private static Configuration loadProperties(final String[] profiles) {
-    // There are different combiners that can be used: OverrideCombiner, MergeCombiner, UnionCombiner
-    final CombinedConfiguration configuration = new CombinedConfiguration(new MergeCombiner());
-    final List<String> configurationsToLoad = new ArrayList<>();
+    CombinedConfiguration configuration = new CombinedConfiguration(new MergeCombiner());
+    List<String> configurationsToLoad = new ArrayList<>();
 
-    // Not very intuitive: First load the specific properties files and then add the default one
     Stream.of(profiles) //
-        .filter(p -> isNotBlank(p)) //
+        .filter(StringUtils::isNotBlank) //
         .map(p -> "application-" + p) //
         .forEach(configurationsToLoad::add);
     configurationsToLoad.add("application");
 
-    for (final String config : configurationsToLoad) {
+    for (var config : configurationsToLoad) {
       try {
         configuration.addConfiguration(new Configurations().properties(new File(config) + ".properties"));
       } catch (final ConfigurationException e) {

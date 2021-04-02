@@ -5,10 +5,11 @@ import com.nacho.blog.springalternatives.fulldemo.model.Product;
 import com.nacho.blog.springalternatives.fulldemo.service.ProductService;
 
 import javax.inject.Inject;
-import java.math.BigDecimal;
+import javax.inject.Singleton;
 import java.util.List;
 import java.util.UUID;
 
+@Singleton
 public class ProductController {
 
   private final ProductService productService;
@@ -19,16 +20,14 @@ public class ProductController {
   }
 
   public List<Product> list() {
-    return null;
+    return productService.getProducts();
   }
 
-  public String create(CreateProductRequest createProductRequest) {
-//final CreateProductRequest createProductRequest
-//        productService.createProduct(createProductRequest.getName(), createProductRequest.getPrice());
-    return "ok";
+  public Product create(CreateProductRequest createProductRequest) {
+    return productService.createProduct(createProductRequest.getName(), createProductRequest.getPrice());
   }
 
-  public Product getById(Integer id) {
-    return Product.builder().id(UUID.randomUUID()).name("name").price(BigDecimal.TEN).build();
+  public Product getById(UUID id) {
+    return productService.getById(id);
   }
 }
