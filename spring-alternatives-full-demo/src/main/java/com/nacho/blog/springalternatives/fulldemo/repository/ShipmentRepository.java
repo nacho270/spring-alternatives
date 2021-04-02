@@ -1,7 +1,6 @@
 package com.nacho.blog.springalternatives.fulldemo.repository;
 
 import com.nacho.blog.springalternatives.fulldemo.model.Shipment;
-import org.jooq.Configuration;
 
 import java.util.UUID;
 

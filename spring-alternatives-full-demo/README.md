@@ -1,77 +1,43 @@
-# Spring + JOOQ (With codegen)
+# Spring alternatives full demo
 
-A simple spring-boot application using JOOQ.
+A fully-fledged application that utilises all the libraries showcased in the repository.
 
-Instead of just using the standard JOOQ libraries, it uses:
+The domain is similar to the one I used in my [JOOQ demo](https://github.com/nacho270/db-libraries-demos).
 
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-jooq</artifactId>
-</dependency>
-```
+- Create products
+- Create shipments. For this you will need:
+  - One or more product ids created at boot
+  - A user id. The user id has to be a number such as 1, 2, 3, etc... and it's retrieved from this endpoint: https://jsonplaceholder.typicode.com/users/1
 
-This (almost) the same as using:
+## Tools/Libraries
 
-```xml
-<dependency>
-  <groupId>org.jooq</groupId>
-  <artifactId>jooq</artifactId>
-</dependency>
-<dependency>
-  <groupId>org.jooq</groupId>
-  <artifactId>jooq-meta</artifactId>
-</dependency>
-<dependency>
-  <groupId>org.jooq</groupId>
-  <artifactId>jooq-codegen</artifactId>
-</dependency>
-```
-
-This version makes use of the JOOQ codegen capabilities and you'll see that's somehow easier and maintenable than the no-codegen version [here](https://github.com/nacho270/db-libraries-demos/tree/master/jooq-no-codegen-demo).
-
-After booting, the app will insert a sample set of products.
-
-## Caveats
-
-I thought it was going to **way** easier to work with the codegen solution but i found a few things:
-
-- The codegen does reverse engineering on the DB to create the clases. So, the process relies on DB connectivity and having the tables already in place.
-- The mapping works fine for queries witout joins but i couldn't find an answer for the `getById` that has an `inner join` and, thus, it brings many rows per shipment.
-- A potential option for this 2 could be to rely on JPA for mapping and creating the schema (either directly through JPA or by using liquibase)
-- I had to change the table names in order to avoid confusion with my POJOs.
-- Given that the schema is not created by the app, i had to add a custom H2 script for the tests.
-- Given that the schema needs to be there before hand, i had to hid the pre-loading of the DB behind a profile so it wouldn't fail when running the tests.
-
-## What you'll see
-
-- Insert/query examples at `src/main/java/com/nacho/blog/jooq/jooqdemo/service/ProductService.java` and `src/main/java/com/nacho/blog/jooq/jooqdemo/service/ShipmentService.java`
-- Count and Delete examples at `src/main/java/com/nacho/blog/jooq/jooqdemo/repository/impl/ShipmentRepositoryImpl.java`
+- Java 11
+- Docker
+- [Apache commons configuration 2](https://github.com/nacho270/spring-alternatives/tree/master/properties/apache-commons-properties-demo) for the configuration properties.
+- [Google dagger](https://github.com/nacho270/spring-alternatives/tree/master/dependency-injection/dagger-dependency-injection-demo) for the dependency injection.
+- [Jooq](https://github.com/nacho270/spring-alternatives/tree/master/database/jooq-demo) for the DB access.
+- [Javalin](https://github.com/nacho270/spring-alternatives/tree/master/rest-apis/javalin-restapi-demo) for the rest api.
+- [Retrofit](https://github.com/nacho270/spring-alternatives/tree/master/rest-templates/retrofit-demo) for rest-template.
 
 ## How to run
 
-The generated files are already inside the app. If you want to re generate run maven with the `codegen` profile: `mvn -Pcodegen clean install -DskipTests`
+As stated, the application relies on Jooq and Dagger which, in turn, depend on code generation. In particular, Jooq depends on a DB connection to generate the classes.
 
-### From IDE
-- Pull mysql: `docker run --name jooq -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:latest`
-- connect to the db and run the `init.sql` script.
-- Run the app with maven `mvn spring-boot:run` or through the main class here: `src/main/java/com/nacho/blog/jooq/jooqdemo/JooqDemoApplication.java`
-- After booting, the app will create the tables and insert a sample set of products.
+1- Pull mysql: `docker run --name alternatives_demo -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:latest` 
 
-### Docker
+2- Connect to the DB and run the `init.sql` script.
 
-- cd into `jooq-with-codegen-demo`
-- `docker-compose up`
+3- Run `mvn clean install`
 
-This will start a dockerized `mysql` with the schema and tables already there.
+4- Run the app:
 
-### Tests
-
-
+    - From the IDE using the main class src/main/java/com/nacho/blog/springalternatives/fulldemo/Main.java
+    - From the console: java -jar target/spring-alternatives-full-demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+    - From docker: docker-compose up. This may take a minute or 2 to start
 
 ### Sample curls
 
-- `curl localhost:8080/product`
-- `curl -XPOST -H 'Content-type:application/json' localhost:8080/product -d '{"name":"keyboard","price":30.5}'`
-- `curl -XPOST -H 'Content-type:application/json' localhost:8080/shipment -d '{"items":[{"product":"e82658bf-cd8b-471c-9711-c0ea77733bdb","quantity":2}, {"product":"db909c72-7aaa-4805-be7b-b1579a9cb2c0","quantity":1}]}'`
+- `curl localhost:8080/ping`
+- `curl -XPOST -H 'Content-type:application/json' localhost:8080/shipment -d '{"userId":5, "items":[{"product":"2deff5ae-7ec2-48be-a2c4-90ea7ffd3c85","quantity":2}, {"product":"d0100c7a-1e18-4cdf-bfdc-a132fe1b3de7","quantity":1}]}'`
+- `curl -XPOST -H 'Content-type:application/json' localhost:8080/product -d '{"name":"keyboard nacho","price":30.5}'`
 - `curl localhost:8080/shipment/20f57155-cf88-4527-ab30-a5c079f9d358`

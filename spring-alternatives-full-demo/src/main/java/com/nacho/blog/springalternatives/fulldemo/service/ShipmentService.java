@@ -5,7 +5,6 @@ import com.nacho.blog.springalternatives.fulldemo.model.Item;
 import com.nacho.blog.springalternatives.fulldemo.model.Shipment;
 import com.nacho.blog.springalternatives.fulldemo.repository.ShipmentRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.jooq.Configuration;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,12 +37,18 @@ public class ShipmentService {
 
   public Shipment createShipment(final CreateShipmentRequest createShipmentRequest) {
     return transactionManager.doInTransaction(configuration -> {
-      Shipment shipment = mapShipment(createShipmentRequest);
-      log.info("Saving shipment");
-      shipment = shipmentRepository.insertShipment(shipment);
-      log.info("Saving items");
-      shipmentRepository.insertShipmentItems(shipment);
-      return shipment;
+      try {
+        Shipment shipment = mapShipment(createShipmentRequest);
+        log.info("Saving shipment");
+        shipment = shipmentRepository.insertShipment(shipment);
+        log.info("Saving items");
+        shipmentRepository.insertShipmentItems(shipment);
+        log.info("Created shipment: {}", shipment);
+        return shipment;
+      } catch (Exception e) {
+        log.error("Error saving shipment: {}", e.getMessage());
+        throw e;
+      }
     });
   }
 

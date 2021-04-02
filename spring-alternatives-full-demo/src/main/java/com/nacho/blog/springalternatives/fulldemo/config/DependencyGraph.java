@@ -8,20 +8,12 @@ import javax.inject.Singleton;
 public class DependencyGraph {
 
   @Singleton
-  @Component(modules = {UserApiModule.class, PersistenceModule.class})
-  interface ProdComponent {
+  @Component(modules = {UserApiModule.class, RepositoriesModule.class, PersistenceModule.class})
+  public interface ProdComponent {
     UrlMappings application();
   }
 
   public static UrlMappings buildApplication() {
-//    if (hasProfile("dev")) {
-////      return DaggerDependencyGraph_DevComponent.create().application();
-//    } else {
-//    }
     return DaggerDependencyGraph_ProdComponent.create().application();
   }
-
-//  private static boolean hasProfile(final String profile) {
-//    return System.getProperty("profile") != null && System.getProperty("profile").contains(profile);
-//  }
 }

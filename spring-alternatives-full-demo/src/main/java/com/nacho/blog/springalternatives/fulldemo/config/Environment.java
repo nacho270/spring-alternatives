@@ -42,9 +42,9 @@ public class Environment {
     List<String> configurationsToLoad = new ArrayList<>();
 
     Stream.of(profiles) //
-        .filter(StringUtils::isNotBlank) //
-        .map(p -> "application-" + p) //
-        .forEach(configurationsToLoad::add);
+            .filter(StringUtils::isNotBlank) //
+            .map(p -> "application-" + p) //
+            .forEach(configurationsToLoad::add);
     configurationsToLoad.add("application");
 
     for (var config : configurationsToLoad) {
@@ -54,6 +54,14 @@ public class Environment {
         log.error(e.getMessage());
       }
     }
+
+    System.getenv().forEach((k, v) -> {
+      if (configuration.containsKey(k)) {
+        log.info("Overriding property {} with value {}", k, v);
+      }
+      configuration.setProperty(k, v);
+    });
+
     return configuration;
   }
 }
