@@ -1,21 +1,19 @@
 package com.nacho.blog.springalternatives.jooqdemo;
 
+import com.nacho.blog.springalternatives.jooqdemo.model.Product;
+import com.nacho.blog.springalternatives.jooqdemo.service.ItemRequest;
+import com.nacho.blog.springalternatives.jooqdemo.service.ProductService;
+import com.nacho.blog.springalternatives.jooqdemo.service.ShipmentService;
+import lombok.extern.slf4j.Slf4j;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
-
-import com.nacho.blog.springalternatives.jooqdemo.model.Product;
-import com.nacho.blog.springalternatives.jooqdemo.service.ItemRequest;
-import com.nacho.blog.springalternatives.jooqdemo.service.ProductService;
-import com.nacho.blog.springalternatives.jooqdemo.service.ShipmentService;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Application {
@@ -46,10 +44,6 @@ public class Application {
     }
   }
 
-  public static void main(final String[] args) {
-    new Application();
-  }
-
   private List<Product> createProducts() {
     return List.of(//
         productService.createProduct(//
@@ -62,6 +56,9 @@ public class Application {
                 .name("macbook pro") //
                 .price(BigDecimal.valueOf(3000)) //
                 .build()));
+  }
 
+  public static void main(final String[] args) {
+    new Application();
   }
 }
