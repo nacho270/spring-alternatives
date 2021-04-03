@@ -18,3 +18,9 @@ In terms of "overriding", you can choose between 3 combiners, being the `UnionCo
 - UnionCombiner: Repeated keys live in different namespace
 - MergeCombiner: For simple keys, the value is replaced. But for complex keys containing different childs, those nodes are merged.
 - OverrideCombiner: Same keys are entirely replaced.
+
+I just couldn't make read lists even with the separator defined.
+
+To read objects I had to implement my own code with reflection. In theory this should also be supported but I couldn't make it work. Not too much documentation about it.
+
+Works fine when you know the type you want to read. I would just keep it simple when use this.
