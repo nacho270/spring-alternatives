@@ -10,17 +10,18 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.javalin.Javalin;
+import io.javalin.plugin.json.JavalinJackson;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Application {
 
-  private static final ObjectMapper MAPPER = new ObjectMapper();
-
   private static final Map<Integer, User> USERS = new HashMap<>();
 
   public void start() {
     final Javalin app = Javalin.create();
+    final var objectMapper = new ObjectMapper();
+    JavalinJackson.configure(objectMapper);
 
     app.before(ctx -> {
       ctx.req.setAttribute("request-start", currentTimeMillis());
@@ -51,7 +52,7 @@ public class Application {
 
     app.post("/user", (ctx) -> {
       try {
-        final User user = MAPPER.readValue(ctx.body(), User.class);
+        final User user = ctx.bodyAsClass(User.class);
         USERS.put(user.getId(), user);
         ctx.res.setStatus(201);
       } catch (final Exception e) {
