@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import javax.inject.Singleton;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.nacho.blog.springalternatives.dagger.dao.StubbedUserKeyValueStore;
@@ -18,6 +17,24 @@ import dagger.Component;
 import dagger.Module;
 
 public class UserSeviceTest {
+
+  private static final UserServiceTestComponent testComponent = DaggerUserSeviceTest_UserServiceTestComponent.builder().build();
+
+  private UserService userSevice = testComponent.userService();
+
+  @Test
+  public void testCanCreateUser() {
+    // given
+    final String userName = "nacho";
+
+    // when
+    final int id = userSevice.addUser(userName);
+
+    // then
+    final User user = userSevice.getById(id);
+    assertThat(user, notNullValue());
+    assertThat(user.getName(), equalTo(userName));
+  }
 
   @Singleton
   @Component(modules = TestModule.class)
@@ -33,26 +50,6 @@ public class UserSeviceTest {
 
     @Binds
     public abstract UserKeyValueStore stubbedUserKeyValueStore(StubbedUserKeyValueStore userKeyValueStore);
-  }
 
-  private static UserService userSevice;
-
-  @BeforeAll
-  public static void setup() {
-    userSevice = DaggerUserSeviceTest_UserServiceTestComponent.builder().build().userService();
-  }
-
-  @Test
-  public void testCanCreateUser() {
-    // given
-    final String userName = "nacho";
-
-    // when
-    final int id = userSevice.addUser(userName);
-
-    // then
-    final User user = userSevice.getById(id);
-    assertThat(user, notNullValue());
-    assertThat(user.getName(), equalTo(userName));
   }
 }

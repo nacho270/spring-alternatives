@@ -33,5 +33,4 @@ public class RedisUserKeyValueStore implements UserKeyValueStore {
     final String userJson = GSON.toJson(user);
     jedis.set(String.valueOf(id), userJson);
   }
-
 }

@@ -4,9 +4,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import org.junit.jupiter.api.BeforeAll;
+import javax.inject.Singleton;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
@@ -15,27 +18,35 @@ import com.nacho.blog.springalternatives.dagger.config.ApplicationProdModule;
 import com.nacho.blog.springalternatives.dagger.model.User;
 
 import dagger.Component;
-
-import javax.inject.Singleton;
+import redis.clients.jedis.Jedis;
 
 @Testcontainers
 public class UserSeviceIntegrationTest {
 
   @Container
   public GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest")) //
-      .withExposedPorts(6379);
+      .withExposedPorts(6379) //
+      .waitingFor( //
+          Wait.forLogMessage(".*Ready to accept connections.*\\n", 1) //
+      );
 
   @Singleton
   @Component(modules = { ApplicationProdModule.class })
-  public interface UserServiceTestComponent {
+  public interface UserServiceIntegrationTestComponent {
     UserService userService();
+
+    Jedis jedis();
   }
 
-  private static UserService userSevice;
+  private static UserServiceIntegrationTestComponent userServiceTestComponent = DaggerUserSeviceIntegrationTest_UserServiceIntegrationTestComponent.builder().build();
+  private UserService userSevice = userServiceTestComponent.userService();
+  private Jedis jedis = userServiceTestComponent.jedis();
 
-  @BeforeAll
-  public static void setup() {
-    userSevice = DaggerUserSeviceTest_UserServiceTestComponent.builder().build().userService();
+  @BeforeEach
+  public void setup() {
+    // Need this here to be able to override the redis port. TestContainers creates redis exposing port 6379 to a random one.
+    // See https://www.testcontainers.org/features/networking/
+    jedis.getClient().setPort(redis.getFirstMappedPort());
   }
 
   @Test

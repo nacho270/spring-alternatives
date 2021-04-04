@@ -1,11 +1,13 @@
 package com.nacho.blog.springalternatives.dagger;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.nacho.blog.springalternatives.dagger.model.User;
 import com.nacho.blog.springalternatives.dagger.service.complex.UserService;
 import com.nacho.blog.springalternatives.dagger.service.simple.Operation;
 
+@Singleton
 public class Application {
 
   private Operation operation;

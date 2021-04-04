@@ -2,7 +2,7 @@
 
 A simple demo on how you would use [google dagger](https://dagger.dev/) to manage your dependency injections.
 
-It sort of emulates [google guice](https://github.com/google/guice) but instead of being 100% code based, it relies on annotation based + generated code.
+It sort of emulates [google guice](https://github.com/google/guice) but instead of being 100% code based, it is annotation based + generated code.
 
 I found it's learning curve is very steep until you realize how it works with a few pros and cons:
 

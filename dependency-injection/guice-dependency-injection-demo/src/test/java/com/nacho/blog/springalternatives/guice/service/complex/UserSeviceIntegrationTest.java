@@ -6,9 +6,11 @@ import static org.junit.Assert.assertThat;
 
 import javax.inject.Inject;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
@@ -16,10 +18,10 @@ import org.testcontainers.utility.DockerImageName;
 import com.nacho.blog.springalternatives.guice.config.ApplicationCommonModule;
 import com.nacho.blog.springalternatives.guice.config.ApplicationProdModule;
 import com.nacho.blog.springalternatives.guice.model.User;
-import com.nacho.blog.springalternatives.guice.service.complex.UserService;
 
 import name.falgout.jeffrey.testing.junit.guice.GuiceExtension;
 import name.falgout.jeffrey.testing.junit.guice.IncludeModule;
+import redis.clients.jedis.Jedis;
 
 @Testcontainers
 @ExtendWith(GuiceExtension.class)
@@ -29,10 +31,23 @@ public class UserSeviceIntegrationTest {
 
   @Container
   public GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest")) //
-      .withExposedPorts(6379);
+      .withExposedPorts(6379) //
+      .waitingFor( //
+          Wait.forLogMessage(".*Ready to accept connections.*\\n", 1) //
+      );
 
   @Inject
   private UserService userSevice;
+
+  @Inject
+  private Jedis jedis;
+
+  @BeforeEach
+  public void setup() {
+    // Need this here to be able to override the redis port. TestContainers creates redis exposing port 6379 to a random one.
+    // See https://www.testcontainers.org/features/networking/
+    jedis.getClient().setPort(redis.getFirstMappedPort());
+  }
 
   @Test
   public void testCanCreateUser() {
