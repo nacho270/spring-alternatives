@@ -30,7 +30,7 @@ public class Application {
       @Override
       public void onResponse(final Call<List<Post>> call, final Response<List<Post>> response) {
         if (response.isSuccessful()) {
-          // trim the resopnse to just 3 for readibilty
+          // trim the resopnse to just 3 for readability
           futurePosts.complete(response.body().stream().limit(3L).collect(Collectors.toList()));
         }
       }
@@ -54,7 +54,7 @@ public class Application {
   public List<Post> getAllPostsSync() throws IOException {
     final Response<List<Post>> response = postService.getPosts().execute();
     if (response.isSuccessful()) {
-      // trim the resopnse to just 3 for readibilty
+      // trim the resopnse to just 3 for readability
       return response.body().stream().limit(3L).collect(Collectors.toList());
     }
     throw new RuntimeException("Error getting all posts");
@@ -71,7 +71,7 @@ public class Application {
   public List<Post> getAllPostsForUserSync(final Integer userId) throws IOException {
     final Response<List<Post>> response = postService.getPostsForUser(userId).execute();
     if (response.isSuccessful()) {
-      // trim the resopnse to just 3 for readibilty
+      // trim the resopnse to just 3 for readability
       return response.body().stream().limit(3L).collect(Collectors.toList());
     }
     throw new RuntimeException("Error getting all posts");

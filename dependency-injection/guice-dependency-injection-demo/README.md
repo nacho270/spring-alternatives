@@ -6,7 +6,7 @@ You will see that you will need to do many things manually like handling differe
 
 Of course, the way I have done things is by no means the only one. You can play a bit more on how you would build the modules.
 
-For JUnit5 you will need a non-official extension`name.falgout.jeffrey.testing.junit5`, although the creator works for google.
+For JUnit5 you will need a non-official extension `name.falgout.jeffrey.testing.junit5`, although the creator works for google.
 
 ### How to run
 

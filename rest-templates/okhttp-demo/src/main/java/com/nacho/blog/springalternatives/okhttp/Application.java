@@ -26,7 +26,7 @@ public class Application {
 
   public List<Post> getAllPostsSync() {
     try {
-      // trim the resopnse to just 3 for readibilty
+      // trim the resopnse to just 3 for readability
       return postService.getPosts().stream().limit(3L).collect(Collectors.toList());
     } catch (final Exception e) {
       throw new RuntimeException("Error getting all posts");
@@ -43,7 +43,7 @@ public class Application {
 
   public List<Post> getAllPostsForUserSync(final Integer userId) {
     try {
-      // trim the resopnse to just 3 for readibilty
+      // trim the resopnse to just 3 for readability
       return postService.getPostsForUser(userId).stream().limit(3L).collect(Collectors.toList());
     } catch (final Exception e) {
       throw new RuntimeException("Error getting all posts");
