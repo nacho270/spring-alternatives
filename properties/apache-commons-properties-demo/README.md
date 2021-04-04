@@ -9,7 +9,7 @@ For this, you will have to write your own code to determine the environment/prof
 
 In this case, I went with a simple approach:
 - The environment/profile is read from "profile" enviroment property
-- Chose properties file format,
+- Chose `properties` file format,
 - Every file must begin with "application"
 - The profile comes after a "-" 
 - Same property on a "lower" file overrides the default.
@@ -19,8 +19,7 @@ In terms of "overriding", you can choose between 3 combiners, being the `UnionCo
 - MergeCombiner: For simple keys, the value is replaced. But for complex keys containing different childs, those nodes are merged.
 - OverrideCombiner: Same keys are entirely replaced.
 
-I just couldn't make read lists even with the separator defined.
+As for the format, you can choose between `PropertiesConfiguration`, `XMLConfiguration` or `YAMLConfiguration`.
 
 To read objects I had to implement my own code with reflection. In theory this should also be supported but I couldn't make it work. Not too much documentation about it.
-
-Works fine when you know the type you want to read. I would just keep it simple when use this.
+Will need recursion to read nested objects.

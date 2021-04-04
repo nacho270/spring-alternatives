@@ -42,6 +42,17 @@ public class EnvironmentTest {
     assertThat(objectConfig.getPropertyListOfString()).contains("one", "two", "three");
   }
 
+  @Test
+  @DisplayName("Should read complex object from the merge of 2 files")
+  public void testReadMergedComplexObject() {
+    System.setProperty("profile", "dev");
+    final var env = new Environment();
+    final ObjectConfig objectConfig = env.getObject("object", ObjectConfig.class);
+    assertThat(objectConfig.getPropertyString()).isEqualTo("property 1 overriden!");
+    assertThat(objectConfig.getPropertyInteger()).isEqualTo(700);
+    assertThat(objectConfig.getPropertyListOfString()).contains("one", "two", "three");
+  }
+
   public static class ObjectConfig {
 
     private String propertyString;
